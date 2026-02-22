@@ -26,3 +26,15 @@ else
   echo "$SOURCE_LINE" >> "$ZSHRC"
   echo "Added to $ZSHRC. Run 'source ~/.zshrc' or open a new terminal to use 'wt'."
 fi
+
+# install /spawn skill for Claude Code
+SKILL_SRC="${SCRIPT_DIR}/skills/spawn"
+SKILL_DST="${HOME}/.claude/skills/spawn"
+
+if [[ -L "$SKILL_DST" || -d "$SKILL_DST" ]]; then
+  echo "/spawn skill already installed at $SKILL_DST"
+else
+  mkdir -p "${HOME}/.claude/skills"
+  ln -s "$SKILL_SRC" "$SKILL_DST"
+  echo "Installed /spawn skill for Claude Code."
+fi

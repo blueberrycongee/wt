@@ -49,6 +49,24 @@ myproject/feature-x
 
 多个 worktree 同时开着时一眼就能分清。
 
+## Claude Code 集成
+
+wt 内置了一个 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 的 `/spawn` 技能。你可以在主 worktree 里和 Claude Code 讨论方案，然后一键派生新实例到新 worktree 中，上下文自动携带。
+
+```
+/spawn fix-login
+```
+
+执行流程：
+
+1. 当前 Claude Code 将讨论内容总结为任务简报
+2. 创建新 worktree `../fix-login`
+3. 将简报写入新 worktree 的 `.claude/CLAUDE.md`
+4. 打开新终端窗口，进入目录，启动 `claude`
+5. 新实例读取简报后直接开始工作
+
+安装脚本会自动将 `/spawn` 技能注册为 Claude Code 全局可用。
+
 ## 原理
 
 `wt` 是一个 zsh 函数（定义在 `wt.plugin.zsh` 中），它调用 `wt.sh` 执行具体逻辑，然后在当前 shell 中执行 `cd`。这样设计是因为子进程无法改变父 shell 的工作目录。

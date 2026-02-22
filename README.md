@@ -49,6 +49,24 @@ myproject/feature-x
 
 This makes it easy to tell tabs apart when running multiple worktrees.
 
+## Claude Code Integration
+
+wt includes a `/spawn` skill for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). It lets you discuss a task in your main worktree, then spawn a new Claude Code instance in a fresh worktree — with context carried over.
+
+```
+/spawn fix-login
+```
+
+What happens:
+
+1. Current Claude Code summarizes the discussion into a task brief
+2. Creates a new worktree `../fix-login`
+3. Writes the brief to `.claude/CLAUDE.md` in the new worktree
+4. Opens a new Terminal window, `cd`s in, and starts `claude`
+5. The new instance reads the brief and starts working immediately
+
+The install script automatically sets up the `/spawn` skill globally for Claude Code.
+
 ## How it works
 
 `wt` is a zsh function (defined in `wt.plugin.zsh`) that calls `wt.sh` for the heavy lifting, then runs `cd` in the current shell. This is necessary because a subprocess cannot change the parent shell's working directory.
