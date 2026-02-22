@@ -22,7 +22,7 @@
 ## 安装
 
 ```bash
-git clone https://github.com/YOUR_USER/wt.git ~/.wt
+git clone https://github.com/blueberrycongee/wt.git ~/.wt
 cd ~/.wt && bash install.sh
 source ~/.zshrc
 ```
